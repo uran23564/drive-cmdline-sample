@@ -61,8 +61,8 @@ public class DriveSample {
    */
   private static final String APPLICATION_NAME = "";
 
-  private static final String UPLOAD_FILE_PATH = "Enter File Path";
-  private static final String DIR_FOR_DOWNLOADS = "Enter Download Directory";
+  private static final String UPLOAD_FILE_PATH = "/home/merz_konstantin/hs_err_pid11359.log";
+  private static final String DIR_FOR_DOWNLOADS = "/";
   private static final java.io.File UPLOAD_FILE = new java.io.File(UPLOAD_FILE_PATH);
 
   /** Directory to store user credentials. */
