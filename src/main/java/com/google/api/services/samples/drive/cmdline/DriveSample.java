@@ -61,8 +61,8 @@ public class DriveSample {
    */
   private static final String APPLICATION_NAME = "GDrive";
 
-  private static final String UPLOAD_FILE_PATH = "/home/merz_konstantin/hs_err_pid11359.log";
-  private static final String DIR_FOR_DOWNLOADS = "/";
+  private static final String UPLOAD_FILE_PATH = "/home/merz_konstantin/diplom.tex";
+  private static final String DIR_FOR_DOWNLOADS = "/tmp";
   private static final java.io.File UPLOAD_FILE = new java.io.File(UPLOAD_FILE_PATH);
 
   /** Directory to store user credentials. */
@@ -154,6 +154,7 @@ public class DriveSample {
     FileContent mediaContent = new FileContent("image/jpeg", UPLOAD_FILE);
 
     Drive.Files.Create insert = drive.files().create(fileMetadata, mediaContent);
+    insert.setFields("id");
     MediaHttpUploader uploader = insert.getMediaHttpUploader();
     uploader.setDirectUploadEnabled(useDirectUpload);
     uploader.setProgressListener(new FileUploadProgressListener());
@@ -178,7 +179,8 @@ public class DriveSample {
       throw new IOException("Unable to create parent directory");
     }
     OutputStream out = new FileOutputStream(new java.io.File(parentDir, uploadedFile.getName()));
-
+    drive.files().get(uploadedFile.getId()).executeMediaAndDownloadTo(out);
+    
     MediaHttpDownloader downloader =
         new MediaHttpDownloader(httpTransport, drive.getRequestFactory().getInitializer());
     downloader.setDirectDownloadEnabled(useDirectDownload);
